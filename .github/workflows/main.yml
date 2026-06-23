@@ -1,0 +1,21 @@
+name: Sync with Bitbucket
+on:
+  schedule:
+    - cron: '0 0 * * *' # Se ejecutará todos los días a medianoche
+  workflow_dispatch:      # Permite ejecutarlo manualmente cuando quieras
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Sync from Bitbucket
+        run: |
+          git remote add bitbucket https://bitbucket.org/spekpy/spekpy_release.git
+          git fetch bitbucket
+          git merge bitbucket/main --allow-unrelated-histories -m "Sincronización automática desde Bitbucket"
+          git push origin main
