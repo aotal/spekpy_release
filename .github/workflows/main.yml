@@ -17,5 +17,5 @@ jobs:
         run: |
           git remote add bitbucket https://bitbucket.org/spekpy/spekpy_release.git
           git fetch bitbucket
-          git merge bitbucket/main --allow-unrelated-histories -m "Sincronización automática desde Bitbucket"
+          git merge bitbucket/master --allow-unrelated-histories -m "Sincronización automática desde Bitbucket"
           git push origin main
