@@ -22,9 +22,9 @@ jobs:
 
       - name: Sync from Bitbucket
         run: |
+          # Evita errores si el remoto ya fue añadido en una ejecución fallida previa
+          git remote remove bitbucket || true
           git remote add bitbucket https://bitbucket.org/spekpy/spekpy_release.git
           git fetch bitbucket --verbose
-          # Se utiliza 'master' ya que es la rama detectada en Bitbucket
           git merge bitbucket/master --allow-unrelated-histories --no-edit
-          # Se utiliza 'master' para coincidir con tu rama actual en GitHub
           git push origin master
